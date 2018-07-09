@@ -1,15 +1,35 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Platform, StatusBar } from 'react-native';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
+import { Constants } from 'expo'
+
 import styles from './style/style'
+import reducer from './reducers'
+
+
+function FlashcardsStatusBar({backgroundColor, ...props}) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 export default class App extends React.Component {
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <FlashcardsStatusBar backgroundColor='#24292e' barStyle='light-content' />
+          <View style={styles.container}>
+            <Text>Incoming Flashcard Application</Text>
+          </View>
+
+        </View>
+      </Provider>
+    )
   }
 }
