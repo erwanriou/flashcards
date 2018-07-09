@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, KeyboardAvoidingView, TextInput } from 'react-native'
+import { Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import { addDeck } from '../actions'
@@ -19,10 +19,11 @@ class NewDeck extends React.Component {
   addDeck() {
     //this function will be in charge to create a new deck and send the data to async storage
     const { title } = this.state
-    //dispatch decks
-    //return to home
+    const { dispatch, navigation } = this.props
+    dispatch(addDeck(title))
+    navigation.navigate('DeckList')
     //send to database
-    //reset state
+    this.setState({title: ''})
   }
 
   render() {
@@ -35,6 +36,9 @@ class NewDeck extends React.Component {
           onChangeText={title => this.setState({title})}
           value={title}
         />
+        <TouchableOpacity onPress={this.addDeck}>
+          <Text>Save</Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     )
   }

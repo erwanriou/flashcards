@@ -19,7 +19,7 @@ function FlashcardsStatusBar({backgroundColor, ...props}) {
   )
 }
 
-const Tabs = createBottomTabNavigator({
+const Main = createBottomTabNavigator({
   //here are define the 2 elements of the bottom menu
   DeckList: {
     screen: DeckList,
@@ -62,7 +62,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <FlashcardsStatusBar backgroundColor='#24292e' barStyle='light-content' />
-          <Tabs />
+          <Main />
         </View>
       </Provider>
     )
