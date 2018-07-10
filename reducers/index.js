@@ -10,14 +10,7 @@ function cards (state = {}, action) {
     case ADD_DECK:
       return {
         ...state,
-        decks: {
-          ...action.decks,
-          [(action.title).toLowerCase()]: {
-            deckTitle: action.title,
-            questions: []
-          }
-        }
-
+        ...action.deck,
       }
     case ADD_CARD:
       return {

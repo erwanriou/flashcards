@@ -61,7 +61,10 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <FlashcardsStatusBar backgroundColor='#24292e' barStyle='light-content' />
+          <FlashcardsStatusBar
+            backgroundColor='#24292e'
+            barStyle='light-content'
+          />
           <Main />
         </View>
       </Provider>
