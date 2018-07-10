@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
+import { saveDeck } from '../utils/api'
 import { addDeck } from '../actions'
 import styles from '../style/style'
 
@@ -22,7 +23,7 @@ class NewDeck extends React.Component {
     const { dispatch, navigation } = this.props
     dispatch(addDeck(title))
     navigation.navigate('DeckList')
-    //send to database
+    saveDeck(title)
     this.setState({title: ''})
   }
 
@@ -36,8 +37,8 @@ class NewDeck extends React.Component {
           onChangeText={title => this.setState({title})}
           value={title}
         />
-        <TouchableOpacity onPress={this.addDeck}>
-          <Text>Save</Text>
+        <TouchableOpacity style={styles.button} onPress={this.addDeck}>
+          <Text style={{color: 'white'}}>Save</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )

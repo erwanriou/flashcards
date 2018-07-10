@@ -12,8 +12,8 @@ function cards (state = {}, action) {
         ...state,
         decks: {
           ...action.decks,
-          [(action.deckTitle).toLowerCase()]: {
-            deckTitle: action.deckTitle,
+          [(action.title).toLowerCase()]: {
+            deckTitle: action.title,
             questions: []
           }
         }
