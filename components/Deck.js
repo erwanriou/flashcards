@@ -4,10 +4,11 @@ import { Text, View } from 'react-native'
 class Deck extends React.Component {
 
   render() {
-    const { deck } = this.props
+    const { title, question } = this.props
     return (
       <View>
-        <Text>{deck.title}</Text>
+        <Text>{title}</Text>
+        <Text>this deck has {question} card(s)</Text>
       </View>
     )
   }

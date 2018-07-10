@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import { fetchDecks } from '../actions'
@@ -9,30 +9,41 @@ import Deck from './Deck'
 
 class DeckList extends React.Component {
 
+  async componentDidMount() {
+    const { dispatch } = this.props
+    const data = await getDecks()
+    dispatch(fetchDecks(JSON.parse(data)))
+  }
+
   render() {
     const { decks } = this.props
     return (
       <View style={styles.container}>
         { !decks
           ? <Text>Add a first deck</Text>
-          : decks.map(deck => (
-            <TouchableOpacity
-              key={deck.title}>
-              <Deck
-                title={deck.title}
-                cards={deck.questions}
-              />
-            </TouchableOpacity>
-          ))
+          : <FlatList
+              data={Object.values(decks)}
+              keyExtractor={item => item.title}
+              renderItem={({ item: { questions, title } }) => {
+                return (
+                  <View>
+                    <Deck
+                      title={title}
+                      question={questions.length} 
+                    />
+                  </View>
+                )
+              }}
+            />
         }
       </View>
     )
   }
 }
 
-function mapStateToProps({decks}) {
+function mapStateToProps(state) {
   return {
-    decks: Object.keys(decks).map(key => decks[key])
+    decks: state.decks
   }
 }
 

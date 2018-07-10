@@ -4,7 +4,7 @@ const STORAGE_KEY = 'flashcards:decks'
 export function getDecks() {
   return AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
     return JSON.parse(result);
-  });
+  })
 }
 
 export const getDeck = deckId => {
@@ -12,7 +12,7 @@ export const getDeck = deckId => {
     .then(result => {
       const decks = JSON.parse(result)
       return decks[deckId].questions
-    });
+    })
 }
 
 export function saveDeck(title) {
