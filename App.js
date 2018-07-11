@@ -11,6 +11,7 @@ import reducer from './reducers'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
 import Deck from './components/Deck'
+import Card from './components/Card'
 
 function FlashcardsStatusBar({backgroundColor, ...props}) {
   return (
@@ -72,7 +73,16 @@ const MainNavigator = createStackNavigator({
         backgroundColor: '#24292e',
       }
     }
-  }
+  },
+  Card: {
+    screen: Card,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#24292e',
+      }
+    }
+  },
 })
 
 export default class App extends React.Component {

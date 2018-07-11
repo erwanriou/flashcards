@@ -16,10 +16,11 @@ class DeckList extends React.Component {
     dispatch(fetchDecks(JSON.parse(data)))
   }
 
-  handleonPress(title) {
+  handleonPress(id) {
     //this function handle the link to the deck page
-    const deckId = (title).toLowerCase()
-    this.props.navigation.navigate('Deck', { deckId })
+    const { navigation } = this.props
+    const deckId = (id).toLowerCase()
+    navigation.navigate('Deck', { deckId })
   }
 
   renderItem = ({ item: { questions, title }}) => {
