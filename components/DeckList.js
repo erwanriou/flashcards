@@ -10,30 +10,42 @@ import Deck from './Deck'
 class DeckList extends React.Component {
 
   async componentDidMount() {
+    //calling initial data from async storage
     const { dispatch } = this.props
     const data = await getDecks()
     dispatch(fetchDecks(JSON.parse(data)))
   }
 
+  handleonPress(title) {
+    //this function handle the link to the deck page
+    const deckId = (title).toLowerCase()
+    this.props.navigation.navigate('Deck', { deckId })
+  }
+
+  renderItem = ({ item: { questions, title }}) => {
+    //function that display the decklist
+    return (
+      <View>
+        <TouchableOpacity
+          style={styles.deck}
+          onPress={() => this.handleonPress(title)}>
+          <Text style={styles.deckTitle}>{title}</Text>
+          <Text style={styles.deckSubTitle}>this deck has {questions.length} card(s)</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   render() {
     const { decks } = this.props
     return (
-      <View style={styles.container}>
+      <View>
         { !decks
           ? <Text>Add a first deck</Text>
           : <FlatList
               data={Object.values(decks)}
               keyExtractor={item => item.title}
-              renderItem={({ item: { questions, title } }) => {
-                return (
-                  <View>
-                    <Deck
-                      title={title}
-                      question={questions.length} 
-                    />
-                  </View>
-                )
-              }}
+              renderItem={this.renderItem}
             />
         }
       </View>

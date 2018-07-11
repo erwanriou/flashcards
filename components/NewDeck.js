@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
-import { saveDeck } from '../utils/api'
+import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
 import styles from '../style/style'
 
@@ -23,7 +23,7 @@ class NewDeck extends React.Component {
     const { dispatch, navigation } = this.props
     dispatch(addDeck(title))
     navigation.navigate('DeckList')
-    saveDeck(title)
+    saveDeckTitle(title)
     this.setState({title: ''})
   }
 
@@ -31,14 +31,17 @@ class NewDeck extends React.Component {
     const { title } = this.state
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
+        <Text
+          style={styles.deckTitle}>What is the title of your new deck?</Text>
         <TextInput
+          style={styles.newDeckInput}
           placeholder='write your deck title here'
           autoFocus={true}
           onChangeText={title => this.setState({title})}
           value={title}
         />
         <TouchableOpacity style={styles.button} onPress={this.addDeck}>
-          <Text style={{color: 'white'}}>Save</Text>
+          <Text style={{color: 'white'}}>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )

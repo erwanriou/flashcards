@@ -15,7 +15,7 @@ export const getDeck = deckId => {
     })
 }
 
-export function saveDeck(title) {
+export function saveDeckTitle(title) {
   const deckId = title.toLowerCase()
   return AsyncStorage.mergeItem(
     STORAGE_KEY,

@@ -10,6 +10,7 @@ import styles from './style/style'
 import reducer from './reducers'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
+import Deck from './components/Deck'
 
 function FlashcardsStatusBar({backgroundColor, ...props}) {
   return (
@@ -19,7 +20,7 @@ function FlashcardsStatusBar({backgroundColor, ...props}) {
   )
 }
 
-const Main = createBottomTabNavigator({
+const Tabs = createBottomTabNavigator({
   //here are define the 2 elements of the bottom menu
   DeckList: {
     screen: DeckList,
@@ -55,6 +56,25 @@ const Main = createBottomTabNavigator({
   }
 })
 
+
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#24292e',
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
 
   render() {
@@ -65,7 +85,7 @@ export default class App extends React.Component {
             backgroundColor='#24292e'
             barStyle='light-content'
           />
-          <Main />
+          <MainNavigator />
         </View>
       </Provider>
     )

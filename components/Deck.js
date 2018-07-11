@@ -1,14 +1,13 @@
 import React from 'react'
 import { Text, View } from 'react-native'
+import styles from '../style/style'
 
 class Deck extends React.Component {
 
   render() {
-    const { title, question } = this.props
     return (
-      <View>
-        <Text>{title}</Text>
-        <Text>this deck has {question} card(s)</Text>
+      <View style={styles.container}>
+        <Text>HELLLOOO</Text>
       </View>
     )
   }
