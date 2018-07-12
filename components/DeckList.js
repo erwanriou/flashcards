@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { ionicons } from '@expo/vector-icons'
 
 import { fetchDecks } from '../actions'
 import { getDecks } from '../utils/api'
