@@ -13,9 +13,16 @@ const styles = StyleSheet.create({
     height: 45,
     width: '50%',
     borderRadius: 4,
-    backgroundColor: '#737373',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0,0,0,0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    }
   },
   deck: {
     padding: 15,
@@ -23,10 +30,43 @@ const styles = StyleSheet.create({
     height: 100,
     width: '80%',
     borderRadius: 4,
-    backgroundColor: '#ea8c13',
+    backgroundColor: 'white',
     justifyContent: 'space-around',
     alignSelf: 'center',
     alignItems: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0,0,0,0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    }
+  },
+  deckDetail: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    justifyContent: 'flex-end',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  deckbutton: {
+    padding: 15,
+    marginBottom: 30,
+    height: 45,
+    width: 200,
+    borderRadius: 4,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0,0,0,0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    }
   },
   deckTitle: {
     fontSize: 20,
@@ -34,7 +74,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   deckSubTitle: {
-    color: 'white',
     textAlign: 'center',
   },
   newDeckInput: {

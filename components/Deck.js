@@ -9,24 +9,43 @@ import NewCard from './NewCard'
 
 
 class Deck extends React.Component {
-  handleonPress() {
+  handleStartQuiz() {
     //this function handle the link to the deck page
     const { navigation } = this.props
-    navigation.navigate('Card')
+    navigation.navigate('Card', {
+      deckId: navigation.state.params.deckId
+    })
+  }
+
+  handleAddCard(deckId) {
+    //this function handle the link to the NewCard component
+    const { navigation } = this.props
+    navigation.navigate('NewCard', {
+      deckId
+    })
   }
 
   render() {
     const { decks, navigation } = this.props
     const deck = decks[navigation.state.params.deckId]
     return (
-      <View style={styles.container}>
-        <Text>{deck.title}</Text>
-        <Text>{deck.questions.length}</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.handleonPress()}>
-          <Text>Start Quiz</Text>
-        </TouchableOpacity>
+      <View style={styles.deckDetail}>
+        <View style={styles.container}>
+          <Text style={styles.deckTitle}>{deck.title}</Text>
+          <Text>this deck contain {deck.questions.length} cards</Text>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.deckbutton}
+            onPress={() => this.handleAddCard(deck.title)}>
+            <Text>Add a Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deckbutton}
+            onPress={() => this.handleStartQuiz()}>
+            <Text>Start Quiz</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

@@ -41,7 +41,7 @@ class NewDeck extends React.Component {
           value={title}
         />
         <TouchableOpacity style={styles.button} onPress={this.addDeck}>
-          <Text style={{color: 'white'}}>Submit</Text>
+          <Text>Submit</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     )

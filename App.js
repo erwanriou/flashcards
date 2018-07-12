@@ -10,6 +10,7 @@ import styles from './style/style'
 import reducer from './reducers'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
+import NewCard from './components/NewCard'
 import Deck from './components/Deck'
 import Card from './components/Card'
 
@@ -76,6 +77,15 @@ const MainNavigator = createStackNavigator({
   },
   Card: {
     screen: Card,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#24292e',
+      }
+    }
+  },
+  NewCard: {
+    screen: NewCard,
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
