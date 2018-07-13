@@ -31,7 +31,7 @@ class Deck extends React.Component {
     return (
       <View style={styles.deckDetail}>
         <View style={styles.container}>
-          <Text style={styles.deckTitle}>{deck.title}</Text>
+          <Text style={styles.title}>{deck.title}</Text>
           <Text>this deck contain {deck.questions.length} cards</Text>
         </View>
         <View style={styles.container}>

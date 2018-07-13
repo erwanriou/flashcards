@@ -51,16 +51,17 @@ const styles = StyleSheet.create({
       height: 3,
     }
   },
-  deckTitle: {
+  title: {
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
   },
-  deckSubTitle: {
-    textAlign: 'center',
-  },
   newDeckInput: {
     margin: 15,
+  },
+  newCardInput: {
+    margin: 15,
+    padding: 20,
   }
 })
 

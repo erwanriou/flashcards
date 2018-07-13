@@ -32,8 +32,8 @@ class DeckList extends React.Component {
           style={styles.deck}
           onPress={() => this.handleonPress(title)}>
           {title.length > 30 || title.length === 0
-            ? <Text style={styles.deckTitle}>title too long or undefine</Text>
-            : <Text style={styles.deckTitle}>{title}</Text>}
+            ? <Text style={styles.title}>title too long or undefine</Text>
+            : <Text style={styles.title}>{title}</Text>}
           <Text style={styles.deckSubTitle}>this deck has {questions.length} card(s)</Text>
           <Ionicons name='ios-arrow-round-forward' size={30}/>
         </TouchableOpacity>

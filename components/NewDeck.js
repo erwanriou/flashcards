@@ -35,7 +35,7 @@ class NewDeck extends React.Component {
         style={styles.deckDetail}>
         <View style={styles.container}>
           <Text
-            style={styles.deckTitle}>
+            style={styles.title}>
             What is the title of your new deck?
           </Text>
           <TextInput

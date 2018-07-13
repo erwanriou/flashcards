@@ -19,13 +19,13 @@ class NewCard extends React.Component {
   }
 
   addCard() {
-    //this function will be in charge to create a new deck and send the data to async storage
+    //this function will be in charge to create a new card and send the data to async storage
     const { question, answer } = this.state
     const { dispatch, navigation } = this.props
 
-    const deckId = (navigation.state.params.title).toLowerCase()
+    const deckId = (navigation.state.params.deckId).toLowerCase()
     dispatch(addCard(deckId, { question, answer }))
-    addCardToDeck(deckId, {question, answer })
+    addCardToDeck(deckId, { question, answer })
     navigation.goBack()
   }
 
@@ -37,11 +37,11 @@ class NewCard extends React.Component {
         style={styles.deckDetail}>
         <View style={styles.container}>
           <Text
-            style={styles.deckTitle}>
+            style={styles.title}>
             Create your New Card
           </Text>
           <TextInput
-            style={styles.newDeckInput}
+            style={styles.newCardInput}
             placeholder='Question'
             multiLine={true}
             numberOfLines={4}
@@ -49,7 +49,7 @@ class NewCard extends React.Component {
             value={question}
           />
           <TextInput
-            style={styles.newDeckInput}
+            style={styles.newCardInput}
             placeholder='Answer'
             multiLine={true}
             numberOfLines={4}

@@ -6,14 +6,31 @@ import styles from '../style/style'
 
 
 class Card extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      flipCard: false,
+      completedQuiz: false,
+    }
+  }
 
   render() {
+    const { flipCard, completedQuiz } = this.setState
+    const { question, answer } = this.props
     return (
       <View style={styles.container}>
-        <Text>HELLLOOO222</Text>
+        { completedQuiz
+          ? <Text>QUIZ COMPLETED</Text>
+          : <Text>QUIZ NOT COMPLETED</Text>}
       </View>
     )
   }
 }
 
-export default Card
+function mapStateToProps(state) {
+  return {
+    decks: state.decks
+  }
+}
+
+export default connect()(Card)
