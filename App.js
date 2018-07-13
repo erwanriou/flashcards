@@ -7,7 +7,7 @@ import { Constants } from 'expo'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 //tool to check reducer and better manage application
-import { composeWithDevTools } from 'remote-redux-devtools'
+import devToolsEnhancer from 'remote-redux-devtools'
 import thunk from 'redux-thunk'
 
 import styles from './style/style'
@@ -17,6 +17,7 @@ import NewDeck from './components/NewDeck'
 import NewCard from './components/NewCard'
 import Deck from './components/Deck'
 import Card from './components/Card'
+
 
 function FlashcardsStatusBar({backgroundColor, ...props}) {
   return (
@@ -99,12 +100,9 @@ const MainNavigator = createStackNavigator({
   },
 })
 
-const composeEnhancers = composeWithDevTools({ realtime: true, port: 19000 });
 const store = createStore(
-  reducer,
-  composeEnhancers(
-    applyMiddleware(thunk)
-  )
+    reducer,
+    devToolsEnhancer()
 )
 
 export default class App extends React.Component {

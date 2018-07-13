@@ -12,13 +12,20 @@ class Card extends React.Component {
       flipCard: false,
       completedQuiz: false,
     }
+    this.handleFlipCard = this.handleFlipCard.bind(this)
+  }
+
+  handleFlipCard() {
+    this.setState({
+      flipCard: !this.state.flipCard
+    })
   }
 
   render() {
     const { flipCard, completedQuiz, index } = this.state
     const { answer, question, questions } = this.props
     return (
-      <View style={styles.container}>
+      <View style={styles.deckDetail}>
         { completedQuiz
           ? <Text>QUIZ COMPLETED</Text>
 
@@ -26,6 +33,14 @@ class Card extends React.Component {
               ? <Text>{questions[index].answer}</Text>
               : <Text>{questions[index].question}</Text>
         }
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleFlipCard}>
+          { flipCard
+              ? <Text>Check Question</Text>
+              : <Text>Check Answer</Text>
+          }
+        </TouchableOpacity>
       </View>
     )
   }
