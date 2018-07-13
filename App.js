@@ -1,10 +1,14 @@
 import React from 'react';
 import { Text, View, StatusBar } from 'react-native';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+
+//tool to check reducer and better manage application
+import { composeWithDevTools } from 'remote-redux-devtools'
+import thunk from 'redux-thunk'
 
 import styles from './style/style'
 import reducer from './reducers'
@@ -95,11 +99,19 @@ const MainNavigator = createStackNavigator({
   },
 })
 
+const composeEnhancers = composeWithDevTools({ realtime: true, port: 19000 });
+const store = createStore(
+  reducer,
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
+)
+
 export default class App extends React.Component {
 
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={{flex: 1}}>
           <FlashcardsStatusBar
             backgroundColor='#24292e'

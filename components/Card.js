@@ -4,33 +4,43 @@ import { connect } from 'react-redux'
 
 import styles from '../style/style'
 
-
 class Card extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      index: 0,
       flipCard: false,
       completedQuiz: false,
     }
   }
 
   render() {
-    const { flipCard, completedQuiz } = this.setState
-    const { question, answer } = this.props
+    const { flipCard, completedQuiz, index } = this.state
+    const { answer, question, questions } = this.props
     return (
       <View style={styles.container}>
         { completedQuiz
           ? <Text>QUIZ COMPLETED</Text>
-          : <Text>QUIZ NOT COMPLETED</Text>}
+
+          : flipCard
+              ? <Text>{questions[index].answer}</Text>
+              : <Text>{questions[index].question}</Text>
+        }
       </View>
     )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { navigation, decks, }) {
+
+  const { deckId } = navigation.state.params
+  const quiz = Object.values(state.decks[deckId])
+  const questions = quiz[1]
+
   return {
-    decks: state.decks
+    questions,
   }
 }
 
-export default connect()(Card)
+
+export default connect(mapStateToProps)(Card)
