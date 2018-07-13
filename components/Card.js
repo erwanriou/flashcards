@@ -13,6 +13,7 @@ class Card extends React.Component {
       completedQuiz: false,
     }
     this.handleFlipCard = this.handleFlipCard.bind(this)
+    this.handleNextQuestion = this.handleNextQuestion.bind(this)
   }
 
   handleFlipCard() {
@@ -21,11 +22,26 @@ class Card extends React.Component {
     })
   }
 
+  handleNextQuestion() {
+    const {  index } = this.state
+    const { questions } = this.props
+    if (questions.length === (index + 1)) {
+      this.setState({
+        index: 0
+      })
+    } else {
+      this.setState({
+        index: this.state.index + 1
+      })
+    }
+  }
+
   render() {
     const { flipCard, completedQuiz, index } = this.state
     const { answer, question, questions } = this.props
     return (
       <View style={styles.deckDetail}>
+        <Text>Question numero {index + 1}/{questions.length}</Text>
         { completedQuiz
           ? <Text>QUIZ COMPLETED</Text>
 
@@ -41,12 +57,17 @@ class Card extends React.Component {
               : <Text>Check Answer</Text>
           }
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleNextQuestion}>
+          <Text>Next Question</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
-function mapStateToProps(state, { navigation, decks, }) {
+function mapStateToProps(state, { navigation, decks }) {
 
   const { deckId } = navigation.state.params
   const quiz = Object.values(state.decks[deckId])
