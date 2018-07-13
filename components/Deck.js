@@ -36,12 +36,12 @@ class Deck extends React.Component {
         </View>
         <View style={styles.container}>
           <TouchableOpacity
-            style={styles.deckbutton}
+            style={styles.button}
             onPress={() => this.handleAddCard(deck.title)}>
             <Text>Add a Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.deckbutton}
+            style={styles.button}
             onPress={() => this.handleStartQuiz()}>
             <Text>Start Quiz</Text>
           </TouchableOpacity>

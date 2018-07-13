@@ -7,27 +7,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
-    padding: 15,
-    margin: 30,
-    height: 45,
-    width: '50%',
-    borderRadius: 4,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: 'rgba(0,0,0,0.24)',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    }
-  },
   deck: {
     padding: 15,
     margin: 15,
-    height: 100,
+    height: 150,
     width: '80%',
     borderRadius: 4,
     backgroundColor: 'white',
@@ -51,7 +34,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  deckbutton: {
+  button: {
     padding: 15,
     marginBottom: 30,
     height: 45,

@@ -1,19 +1,72 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, KeyboardAvoidingView, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 
 import styles from '../style/style'
+import { addCard } from '../actions'
+import { addCardToDeck } from '../utils/api'
 
 
 class NewCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      question: '',
+      answer: '',
+    }
+
+    this.addCard = this.addCard.bind(this);
+  }
+
+  addCard() {
+    //this function will be in charge to create a new deck and send the data to async storage
+    const { question, answer } = this.state
+    const { dispatch, navigation } = this.props
+
+    const deckId = (navigation.state.params.title).toLowerCase()
+    dispatch(addCard(deckId, { question, answer }))
+    addCardToDeck(deckId, {question, answer })
+    navigation.goBack()
+  }
 
   render() {
+    const { question, answer } = this.state
     return (
-      <View style={styles.container}>
-        <Text>NEW CARD</Text>
-      </View>
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={styles.deckDetail}>
+        <View style={styles.container}>
+          <Text
+            style={styles.deckTitle}>
+            Create your New Card
+          </Text>
+          <TextInput
+            style={styles.newDeckInput}
+            placeholder='Question'
+            multiLine={true}
+            numberOfLines={4}
+            onChangeText={question => this.setState({question})}
+            value={question}
+          />
+          <TextInput
+            style={styles.newDeckInput}
+            placeholder='Answer'
+            multiLine={true}
+            numberOfLines={4}
+            onChangeText={answer => this.setState({answer})}
+            value={answer}
+          />
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.addCard}>
+            <Text>Submit</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 }
 
-export default NewCard
+export default connect()(NewCard)

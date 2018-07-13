@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 import { fetchDecks } from '../actions'
 import { getDecks } from '../utils/api'
@@ -31,8 +31,11 @@ class DeckList extends React.Component {
         <TouchableOpacity
           style={styles.deck}
           onPress={() => this.handleonPress(title)}>
-          <Text style={styles.deckTitle}>{title}</Text>
+          {title.length > 30 || title.length === 0
+            ? <Text style={styles.deckTitle}>title too long or undefine</Text>
+            : <Text style={styles.deckTitle}>{title}</Text>}
           <Text style={styles.deckSubTitle}>this deck has {questions.length} card(s)</Text>
+          <Ionicons name='ios-arrow-round-forward' size={30}/>
         </TouchableOpacity>
       </View>
     )

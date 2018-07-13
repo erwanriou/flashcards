@@ -30,19 +30,28 @@ class NewDeck extends React.Component {
   render() {
     const { title } = this.state
     return (
-      <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <Text
-          style={styles.deckTitle}>What is the title of your new deck?</Text>
-        <TextInput
-          style={styles.newDeckInput}
-          placeholder='write your deck title here'
-          autoFocus={true}
-          onChangeText={title => this.setState({title})}
-          value={title}
-        />
-        <TouchableOpacity style={styles.button} onPress={this.addDeck}>
-          <Text>Submit</Text>
-        </TouchableOpacity>
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={styles.deckDetail}>
+        <View style={styles.container}>
+          <Text
+            style={styles.deckTitle}>
+            What is the title of your new deck?
+          </Text>
+          <TextInput
+            style={styles.newDeckInput}
+            placeholder='write your deck title here'
+            onChangeText={title => this.setState({title})}
+            value={title}
+          />
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.addDeck}>
+            <Text>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     )
   }
