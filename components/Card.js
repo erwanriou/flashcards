@@ -11,9 +11,18 @@ class Card extends React.Component {
       index: 0,
       flipCard: false,
       completedQuiz: false,
+      score: 0,
     }
     this.handleFlipCard = this.handleFlipCard.bind(this)
     this.handleNextQuestion = this.handleNextQuestion.bind(this)
+    this.handleResetQuiz = this.handleResetQuiz.bind(this)
+    this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this)
+  }
+
+  handleCorrectAnswer() {
+    this.setState({
+      score: this.state.score +1
+    })
   }
 
   handleFlipCard() {
@@ -36,36 +45,77 @@ class Card extends React.Component {
     }
   }
 
+  handleResetQuiz() {
+    const {  index } = this.state
+    this.setState({
+      completedQuiz: false,
+      index: 0,
+      score: 0,
+    })
+  }
+
   render() {
-    const { flipCard, completedQuiz, index } = this.state
+    const { flipCard, completedQuiz, index, score } = this.state
     const { answer, question, questions } = this.props
     return (
       <View style={styles.quiz}>
         <View>
           <Text style={{textAlign: 'center', margin: 10}}>Question number {index + 1}/{questions.length}</Text>
           { completedQuiz
-            ? <Text style={[styles.title, {margin: 100}]}>QUIZ COMPLETED</Text>
+            ? <View>
+                <Text style={[styles.title, {margin: 100}]}>QUIZ COMPLETED</Text>
+                <Text style={{textAlign: 'center'}}>Your result is {Math.round(score*100/questions.length)}%</Text>
+              </View>
 
             : flipCard
-                ? <Text style={[styles.title, {margin: 100}]}>{questions[index].answer}</Text>
-                : <Text style={[styles.title, {margin: 100}]}>{questions[index].question}</Text>
+                ? <Text style={styles.title}>{questions[index].answer}</Text>
+                : <Text style={styles.title}>{questions[index].question}</Text>
           }
         </View>
-        <View style={styles.quizQuestion}>
-          <TouchableOpacity
-            style={styles.quizButton}
-            onPress={this.handleFlipCard}>
-            { flipCard
-                ? <Text>Check Question</Text>
-                : <Text>Check Answer</Text>
-            }
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.quizButton}
-            onPress={this.handleNextQuestion}>
-            <Text>Next Question</Text>
-          </TouchableOpacity>
-        </View>
+        { completedQuiz === true
+          ? null
+          : <View>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  this.handleNextQuestion()
+                }}>
+                <Text>INCORRECT</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  this.handleCorrectAnswer()
+                  this.handleNextQuestion()
+                }}>
+                <Text>CORRECT</Text>
+              </TouchableOpacity>
+            </View>
+        }
+        { completedQuiz === true
+          ? <View style={styles.quizQuestion}>
+              <TouchableOpacity
+                style={styles.quizButton}
+                onPress={this.handleResetQuiz}>
+                <Text>Reset Quiz</Text>
+              </TouchableOpacity>
+            </View>
+          : <View style={styles.quizQuestion}>
+              <TouchableOpacity
+                  style={styles.quizButton}
+                  onPress={this.handleFlipCard}>
+                  { flipCard
+                      ? <Text>Check Question</Text>
+                      : <Text>Check Answer</Text>
+                  }
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.quizButton}
+                  onPress={this.handleNextQuestion}>
+                  <Text>Skip Question</Text>
+                </TouchableOpacity>
+              </View>
+        }
       </View>
     )
   }
