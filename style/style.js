@@ -34,11 +34,38 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
+  quiz: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
   button: {
     padding: 15,
     marginBottom: 30,
     height: 45,
     width: 200,
+    borderRadius: 4,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0,0,0,0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    }
+  },
+  quizButton: {
+    padding: 15,
+    height: 45,
+    width: '40%',
+    marginBottom: 30,
+    margin: 10,
     borderRadius: 4,
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -62,6 +89,10 @@ const styles = StyleSheet.create({
   newCardInput: {
     margin: 15,
     padding: 20,
+  },
+  quizQuestion: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 })
 

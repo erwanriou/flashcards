@@ -46,7 +46,7 @@ class DeckList extends React.Component {
     return (
       <View>
         { !decks
-          ? <Text>Add a first deck</Text>
+          ? <Text style={{textAlign: 'center'}}>Add a first deck</Text>
           : <FlatList
               data={Object.values(decks)}
               keyExtractor={item => item.title}

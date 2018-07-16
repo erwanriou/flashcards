@@ -1,14 +1,13 @@
 import React from 'react';
 import { Text, View, StatusBar } from 'react-native';
-import { createStore, applyMiddleware } from 'redux'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 //tool to check reducer and better manage application
-import { composeWithDevTools } from 'remote-redux-devtools'
-import thunk from 'redux-thunk'
+import devToolsEnhancer from 'remote-redux-devtools'
 
 import styles from './style/style'
 import reducer from './reducers'
@@ -17,6 +16,7 @@ import NewDeck from './components/NewDeck'
 import NewCard from './components/NewCard'
 import Deck from './components/Deck'
 import Card from './components/Card'
+
 
 function FlashcardsStatusBar({backgroundColor, ...props}) {
   return (
@@ -99,12 +99,9 @@ const MainNavigator = createStackNavigator({
   },
 })
 
-const composeEnhancers = composeWithDevTools({ realtime: true, port: 19000 });
 const store = createStore(
-  reducer,
-  composeEnhancers(
-    applyMiddleware(thunk)
-  )
+    reducer,
+    devToolsEnhancer()
 )
 
 export default class App extends React.Component {
