@@ -12,9 +12,11 @@ class Deck extends React.Component {
   handleStartQuiz() {
     //this function handle the link to the deck page
     const { navigation } = this.props
-    navigation.navigate('Card', {
-      deckId: navigation.state.params.deckId
-    })
+    if (navigation.state.params.deckId) {
+      navigation.navigate('Card', {
+        deckId: navigation.state.params.deckId
+      })
+    }    
   }
 
   handleAddCard(deckId) {

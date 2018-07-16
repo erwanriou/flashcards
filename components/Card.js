@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import styles from '../style/style'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Card extends React.Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class Card extends React.Component {
     this.handleNextQuestion = this.handleNextQuestion.bind(this)
     this.handleResetQuiz = this.handleResetQuiz.bind(this)
     this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this)
+  }
+
+  componentDidMount() {
+    clearLocalNotification().then(setLocalNotification)
   }
 
   handleCorrectAnswer() {
@@ -38,6 +43,7 @@ class Card extends React.Component {
       this.setState({
         completedQuiz:  true,
       })
+      clearLocalNotification().then(setLocalNotification)
     } else {
       this.setState({
         index: this.state.index + 1
@@ -59,20 +65,25 @@ class Card extends React.Component {
     const { answer, question, questions } = this.props
     return (
       <View style={styles.quiz}>
-        <View>
-          <Text style={{textAlign: 'center', margin: 10}}>Question number {index + 1}/{questions.length}</Text>
-          { completedQuiz
-            ? <View>
-                <Text style={[styles.title, {margin: 100}]}>QUIZ COMPLETED</Text>
-                <Text style={{textAlign: 'center'}}>Your result is {Math.round(score*100/questions.length)}%</Text>
-              </View>
+        { questions.length === 0
+          ? <View>
+              <Text style={{textAlign: 'center', marginTop: 100}}>Add a question first</Text>
+            </View>
+          : <View>
+              <Text style={{textAlign: 'center', margin: 10}}>Question number {index + 1}/{questions.length}</Text>
+              { completedQuiz
+                ? <View>
+                    <Text style={[styles.title, {margin: 100}]}>QUIZ COMPLETED</Text>
+                    <Text style={{textAlign: 'center'}}>Your result is {Math.round(score*100/questions.length)}%</Text>
+                  </View>
 
-            : flipCard
-                ? <Text style={styles.title}>{questions[index].answer}</Text>
-                : <Text style={styles.title}>{questions[index].question}</Text>
-          }
-        </View>
-        { completedQuiz === true
+                : flipCard
+                    ? <Text style={styles.title}>{questions[index].answer}</Text>
+                    : <Text style={styles.title}>{questions[index].question}</Text>
+              }
+            </View>
+        }
+        { completedQuiz === true || questions.length  === 0
           ? null
           : <View>
               <TouchableOpacity
@@ -100,21 +111,23 @@ class Card extends React.Component {
                 <Text>Reset Quiz</Text>
               </TouchableOpacity>
             </View>
-          : <View style={styles.quizQuestion}>
-              <TouchableOpacity
-                  style={styles.quizButton}
-                  onPress={this.handleFlipCard}>
-                  { flipCard
-                      ? <Text>Check Question</Text>
-                      : <Text>Check Answer</Text>
-                  }
-                </TouchableOpacity>
+          : questions.length  === 0
+            ? null
+            : <View style={styles.quizQuestion}>
                 <TouchableOpacity
-                  style={styles.quizButton}
-                  onPress={this.handleNextQuestion}>
-                  <Text>Skip Question</Text>
-                </TouchableOpacity>
-              </View>
+                    style={styles.quizButton}
+                    onPress={this.handleFlipCard}>
+                    { flipCard
+                        ? <Text>Check Question</Text>
+                        : <Text>Check Answer</Text>
+                    }
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.quizButton}
+                    onPress={this.handleNextQuestion}>
+                    <Text>Skip Question</Text>
+                  </TouchableOpacity>
+                </View>
         }
       </View>
     )
