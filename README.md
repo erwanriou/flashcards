@@ -3,8 +3,8 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 ## Table of Contents
 
-* [iniciate the project](#initiate the project)
-* [How it Work](#[How it Work)
+* [iniciate the project](#initiate-the-project)
+* [How it Work](#[How-it-Work)
 
 ## initiate the project
 
@@ -15,6 +15,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 ## How it Work
 
+* This project have been realized for IOS and tested with an Iphone 5
 * This application is a quiz maker and reminder. you can create an infinite pool of deck in witch you can create an infinite pool of cards.
 * Make a daily quiz to train yourself in your quotidian tasks
 * I hope you enjoy the application!
